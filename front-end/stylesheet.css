@@ -1,0 +1,32 @@
+/* selects the body element */
+body {
+    font-size: 24px;
+}
+
+h1 {
+    /* using a sans-serif font for headings is popular when mixing different type faces
+        https://www.adobe.com/creativecloud/design/discover/serif-vs-sans-serif.html */
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* selects all elements of the wrapper class */
+.wrapper {
+    /* there are some built in colors like lightgray, 
+        or you can use hex codes like #ffffff */
+    background: lightgray;
+
+    /* margin is the external spacing between this element and others */
+    margin: 24px;
+
+    /* padding is the internal spacing of this element */
+    padding: 24px;
+}
+
+.salmon {
+    color: salmon;
+}
+
+/* selects the element with id = adjective */
+#adjective {
+    font-family: "Comic Sans MS";
+}
