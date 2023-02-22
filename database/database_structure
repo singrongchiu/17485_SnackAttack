@@ -2,8 +2,11 @@ users document:
 
 personDocument = {
         "login": {"userhash": "Abhay", "passwordhash": "Samant"},
+        "email": "asd;lfj@kladf3d",
         "projects": ["proj1", "proj2", "proj3"]}
 
         credentials are stored as hashes,
         projects are stored as project ids
+
+------------------------------------------------------------------
 
