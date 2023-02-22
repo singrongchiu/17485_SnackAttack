@@ -1,4 +1,5 @@
 import pymongo
+
 client = pymongo.MongoClient("mongodb+srv://test_user:Passw0rd@cluster0.c3m9ayf.mongodb.net/?retryWrites=true&w=majority")
 db = client.test
 users = db.users
@@ -7,8 +8,7 @@ users = db.users
 # and inserts a new user
 # does not do hashing or checking for valid usernames/passwords
 # returns 1 if successful and 0 if unsuccessful
-def create_new_user(usernamehash, passwordhash):
-    user = usernamehash
+def create_new_user(usernamehash, passwordhash, emailhash):
     myquery = {"login.userhash": usernamehash}
     x = users.find_one(myquery)
     if x != None:
@@ -17,13 +17,15 @@ def create_new_user(usernamehash, passwordhash):
 
     personDocument = {
         "login": {"userhash": usernamehash, "passwordhash": passwordhash},
+        "email": emailhash, 
         "projects": []}
 
     users.insert_one(personDocument)
     print("User account successfully created")
     return 1
 
-# returns 1 if successful and 0 if unsuccessful
+# returns 1 if userhash and password hash matches and 
+# 0 if the username and password don't match
 def sign_in(usernamehash, passwordhash):
     myquery = {"login.userhash": usernamehash}
     x = users.find_one(myquery)
@@ -39,4 +41,14 @@ def sign_in(usernamehash, passwordhash):
         print("Passwordhash", passwordhash, "is INCORRECT")
         return 0
 
+def get_login(emailhash):
+    myquery = {"email": emailhash}
+    x = users.find_one(myquery)
+    return(x["login"]["userhash"], x["login"]["passwordhash"])
 
+def change_password(usernamehash, passwordhash): 
+    users.update_one({"login.userhash": usernamehash},
+        {"$set": {
+            "login.passwordhash": passwordhash
+        }
+        })
