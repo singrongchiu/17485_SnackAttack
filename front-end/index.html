@@ -2,20 +2,28 @@
 <html>
     <head>
         <title>Welcome!</title>
+
+        <body>
+            <div class="center">
+                <h1>Login</h1>
+                <form method="post">
+                    <div class="txt_field">
+                        <label> Username </label>
+                        <input type="text" required>
+                    </div>
+                    <div class="txt_field">
+                        <label> Password  </label>
+                        <input type="password" required>
+                    </div>
+                </form>
+            </div>
+        </body>
+
+        <a href="index2.html">
+        <button> Submit </button>
+
+        </a>
+
         <link href="./stylesheet.css" rel="stylesheet">
     </head>
-    <body>
-        <div class="wrapper">
-            <h1>Welcome</h1>
-            <p>
-                This page is pretty <span id="adjective">static</span>.
-            </p>
-            <input oninput="toggleWordColor()" type="text" id="adjective-input"></input>
-            <button onclick="changeWord()">Click</button>
-        </div>
-        <!--
-            This is an HTML comment.
-        -->
-        <script src="./script.js"></script>
-    </body>
 </html>
