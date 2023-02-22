@@ -46,9 +46,14 @@ def get_login(emailhash):
     x = users.find_one(myquery)
     return(x["login"]["userhash"], x["login"]["passwordhash"])
 
+# 0 if userhash does not exist, 1 if successful
 def change_password(usernamehash, passwordhash): 
+    record = users.find_one({"login.userhash": usernamehash})
+    if record is None:
+        return 0
     users.update_one({"login.userhash": usernamehash},
         {"$set": {
             "login.passwordhash": passwordhash
         }
         })
+    return 1
