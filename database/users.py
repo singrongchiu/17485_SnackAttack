@@ -1,8 +1,8 @@
 import pymongo
 
-client = pymongo.MongoClient("mongodb+srv://test_user:Passw0rd@cluster0.c3m9ayf.mongodb.net/?retryWrites=true&w=majority")
-db = client.test
-users = db.users
+db = "mongodb+srv://test_user:Passw0rd@cluster0.c3m9ayf.mongodb.net/?retryWrites=true&w=majority"
+client = pymongo.MongoClient(db)
+users = client.test.users
 
 # checks if the username hash already exists in the database
 # and inserts a new user
@@ -48,8 +48,11 @@ def get_login(emailhash):
 
 # 0 if userhash does not exist, 1 if successful
 def change_password(usernamehash, passwordhash): 
+    users = client.test.users
+
     record = users.find_one({"login.userhash": usernamehash})
-    if record is None:
+    if record is None: 
+        client.close()
         return 0
     users.update_one({"login.userhash": usernamehash},
         {"$set": {
@@ -57,3 +60,6 @@ def change_password(usernamehash, passwordhash):
         }
         })
     return 1
+
+# def close_connection():
+#     client.close()

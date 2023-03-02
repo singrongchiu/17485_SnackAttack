@@ -1,7 +1,7 @@
 import sys
 import smtplib
 
-sys.path.insert(0, "../")
+sys.path.insert(0, "./")
 import database.users as users
 import backend.cipher as cipher
 
