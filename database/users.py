@@ -51,8 +51,7 @@ def change_password(usernamehash, passwordhash):
     users = client.test.users
 
     record = users.find_one({"login.userhash": usernamehash})
-    if record is None: 
-        client.close()
+    if record is None:
         return 0
     users.update_one({"login.userhash": usernamehash},
         {"$set": {

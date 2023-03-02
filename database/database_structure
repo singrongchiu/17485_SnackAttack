@@ -9,4 +9,10 @@ personDocument = {
         projects are stored as project ids
 
 ------------------------------------------------------------------
+hwset document
 
+hwsetDocument = {
+        "name": "HWSet1",
+        "id": 1, 
+        "capacity": 3000,
+        "availability": 200}
