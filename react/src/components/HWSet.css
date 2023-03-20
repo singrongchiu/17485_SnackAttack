@@ -1,0 +1,12 @@
+
+.hwSetTable{
+    width: 100%;
+    align-items: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-spacing: 8px;
+}
+
+.amount{
+    max-width: 80px;
+}
