@@ -1,7 +1,7 @@
 import './Project.css'
 import React, {Component} from 'react';
 import Button from '@mui/material/Button';
-import { HWSet } from './HWSet';
+import  HWSet from './HWSet';
 
 export class Project extends Component{
     constructor(props){
