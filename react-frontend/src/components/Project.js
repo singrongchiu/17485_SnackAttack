@@ -1,39 +1,55 @@
 import './Project.css'
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import Button from '@mui/material/Button';
-import  HWSet from './HWSet';
+import HWSet from './HWSet';
 
-export class Project extends Component{
-    constructor(props){
-        super(props)
-        this.state = {status: 'Join'}
+export default function Project (props) {
+    var [status, setStatus] = useState("Join")
 
-        this.handleChange = this.handleChange.bind(this);
-    }
+    let myAsyncFunction = async (url) => {
+        const response = await fetch(url)
+        let responseJson = await response.json()
+        console.log("response", responseJson)
 
-    handleChange(event){
-        if(this.state.status === 'Join'){
-            this.setState({status: 'Leave'})
-        }else{
-            this.setState({status: 'Join'})
+        var action = url.split("/")
+        action = action[3]
+
+        if(action == "joinproject"){
+            alert("Joined " + responseJson["id"])
+        }else if (action == "leaveproject"){
+            alert("Left " + responseJson["id"])
         }
     }
 
-    render(){
-        return(
-            <table>
-                <tr>
-                    <td className='projectTD'>Project Name {this.props.number}</td>
-                    <td className='projectTD'>list of authorized users</td>
-                    <td className='projectTD'>
-                        <HWSet number={1}/>
-                        <HWSet number={2}/>
-                    </td>
-                    <td className='projectTD'>
-                        <Button variant="contained" onClick={this.handleChange}>{this.state.status}</Button>
-                    </td>
-                </tr>
-            </table>
-        )
+    const handleChange = (event) => {
+        var change;
+
+        if(status === 'Join'){
+            setStatus("Leave")
+            change = "joinproject"
+        }else{
+            setStatus("Join")
+            change = "leaveproject"
+        }
+        var url = "http://127.0.0.1/" + change + "/" + props.projectId
+        myAsyncFunction(url)
     }
+
+    
+    return(
+        <table>
+            <tr>
+                <td className='projectTD'>Project Name {props.projectId}</td>
+                <td className='projectTD'>list of authorized users</td>
+                <td className='projectTD'>
+                    <HWSet projectId={props.projectId} hwSetID={1}/>
+                    <HWSet projectId={props.projectId} hwSetID={2}/>
+                </td>
+                <td className='projectTD'>
+                    <Button variant="contained" onClick={handleChange}>{status}</Button>
+                </td>
+            </tr>
+        </table>
+    )
+
 }
