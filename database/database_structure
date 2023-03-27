@@ -9,10 +9,19 @@ personDocument = {
         projects are stored as project ids
 
 ------------------------------------------------------------------
-hwset document
+hwset document:
 
 hwsetDocument = {
         "name": "HWSet1",
-        "id": 1, 
         "capacity": 3000,
         "availability": 200}
+
+------------------------------------------------------------------
+projects document:
+
+projectDocument = {
+        "id": "id_string222",
+        "password": "Samant",
+        "checkedout": {1: 30, 2:40}     ## {int project id: int number checked out}
+        "members": {"Abhay", "lululolol"}
+        }

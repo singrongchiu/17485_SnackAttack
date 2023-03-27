@@ -15,28 +15,23 @@ def queryHWSet2():
     hwset = set.find_one(myquery)
     return (hwset['availability'], hwset['capacity'])
 
-def queryHWSet(id):
-    myquery = {"id": id}
-    hwset = set.find_one(myquery)
-    return (hwset['availability'], hwset['capacity'])
-
 # return 0 if unsuccessful, 1 if successful
-def initializeHWSet(id, capacity, availability):
-    exists = set.find_one({"id": id})
+def initializeHWSetWithName(hwsetname, capacity, availability):
+    exists = set.find_one({"name": "HWSet1"})
     if exists is not None:
-        print("id", id, "already exists")
+        print("Hwset name", hwsetname, "already exists")
         return 0
-    
+
     hwsetDocument = {
         "name": "HWSet" + str(id),
-        "id": id, 
+        "id": id,
         "capacity": capacity,
         "availability": availability}
     set.insert_one(hwsetDocument)
     return 1
 
 # return 0 if unsuccessful, 1 if successful
-def changeHWSet1Availability(newCapacity):
+def changeHWSet1Capacity(newCapacity):
     set.update_one({"name": "HWSet1"},
         {"$set": {
             "capacity": newCapacity
@@ -45,7 +40,7 @@ def changeHWSet1Availability(newCapacity):
     return 1
 
 # return 0 if unsuccessful, 1 if successful
-def changeHWSet2Availability(newCapacity):
+def changeHWSet2Capacity(newCapacity):
     set.update_one({"name": "HWSet2"},
         {"$set": {
             "capacity": newCapacity
@@ -54,11 +49,11 @@ def changeHWSet2Availability(newCapacity):
     return 1
 
 # return 0 if unsuccessful, 1 if successful
-def changeCapacity(id, newCapacity):
-    record = set.find_one({"id": id})
-    if record is None: 
+def changeCapacityWithName(hwsetname, newCapacity):
+    record = set.find_one({"name": hwsetname})
+    if record is None:
         return 0
-    set.update_one({"id": id},
+    set.update_one({"name": hwsetname},
         {"$set": {
             "capacity": newCapacity
         }
@@ -84,11 +79,11 @@ def changeHWSet2Availability(newAvailability):
     return 1
 
 # return 0 if unsuccessful, 1 if successful
-def changeAvailability(id, newAvailability):
-    record = set.find_one({"id": id})
-    if record is None: 
+def changeAvailabilityWithName(hwsetname, newAvailability):
+    record = set.find_one({"name": hwsetname})
+    if record is None:
         return 0
-    set.update_one({"id": id},
+    set.update_one({"name": hwsetname},
         {"$set": {
             "availability": newAvailability
         }
