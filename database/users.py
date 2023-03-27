@@ -17,8 +17,7 @@ def create_new_user(usernamehash, passwordhash, emailhash):
 
     personDocument = {
         "login": {"userhash": usernamehash, "passwordhash": passwordhash},
-        "email": emailhash, 
-        "projects": []}
+        "email": emailhash}
 
     users.insert_one(personDocument)
     print("User account successfully created")

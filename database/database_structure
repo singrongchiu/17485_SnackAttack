@@ -3,7 +3,7 @@ users document:
 personDocument = {
         "login": {"userhash": "Abhay", "passwordhash": "Samant"},
         "email": "asd;lfj@kladf3d",
-        "projects": ["proj1", "proj2", "proj3"]}
+        "checkedout": {"HWSet1": 0, "HWSet2": 0}}
 
         credentials are stored as hashes,
         projects are stored as project ids
@@ -22,6 +22,5 @@ projects document:
 projectDocument = {
         "id": "id_string222",
         "password": "Samant",
-        "checkedout": {1: 30, 2:40}     ## {int project id: int number checked out}
-        "members": {"Abhay", "lululolol"}
+        "checkedout": {"HWSet1": 30, "HWSet2":40}     ## {int project id: int number checked out}
         }
