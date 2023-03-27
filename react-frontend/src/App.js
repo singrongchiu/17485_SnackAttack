@@ -1,6 +1,5 @@
 import './App.css';
-import {Projects} from './components/Projects';
-import { HWSet } from './components/HWSet';
+import Projects from './components/Projects';
 
 function App() {
   return (
