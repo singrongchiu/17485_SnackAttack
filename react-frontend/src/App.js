@@ -6,15 +6,16 @@ import HWSet from "./components/HWSet";
 import Project from "./components/Project";
 import history from './History';
 
+import ReactDOM from "react-dom/client";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+
 function App() {
+
   return (
-      <Router history={history}>
-          <Routes>
-          <Route path="/" element={<Login/>} />
-              <Route path="/Login" element={<Login/>} />
-              <Route path="/Project" element={<Project/>} />
-          </Routes>
-      </Router>
+    <div></div>
   )
 }
 

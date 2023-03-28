@@ -4,17 +4,45 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes } from 'react-router-dom';
 import './index.css';
 import App from './App';
+import Login from "./components/Login";
+import Project from "./components/Project";
 
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+
+const defaultpage = createBrowserRouter([
+  {
+    path: "/",
+    element: <Login />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/project",
+    element: <Project/>,
+  }
+]);
+
+// const root = ReactDOM.createRoot(document.getElementById('root'));
+// root.render(
+//   <React.StrictMode>
+//     <BrowserRouter>
+//       <div className = "App">
+//         <Routes/>
+//       </div>
+//     </BrowserRouter>
+//   </React.StrictMode>
+// );
+
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <div className = "App">
-        <Routes/>
-      </div>
-    </BrowserRouter>
+      <RouterProvider router={defaultpage} />
   </React.StrictMode>
 );
 
