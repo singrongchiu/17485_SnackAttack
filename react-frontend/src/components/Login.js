@@ -1,4 +1,5 @@
 import React, {useState, Component} from 'react';
+import history from '../History';
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button';
 
@@ -31,9 +32,7 @@ export default function Login(props){
                             <TextField id='outlined-basic' label='Password' variant="outlined" onChange={handlePassword}/>
                         </div>
                     </form>
-                    <a href="index2.html">
-                        <Button variant="contained"> Submit </Button>
-                    </a>
+                        <Button variant="contained" onClick={()=> history.push('/Project')} > Submit</Button>
                 </div>
             </body>
         </div>
