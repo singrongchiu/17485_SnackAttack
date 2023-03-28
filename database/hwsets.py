@@ -5,90 +5,80 @@ client = pymongo.MongoClient(db)
 set = client.test.hardware
 
 # get availability and capacity
-def queryHWSet1():
-    myquery = {"name:": 'HWSet1'}
+def queryHWSet(name):
+    myquery = {"name:": name}
     hwset = set.find_one(myquery)
-    return (hwset['availability'], hwset['capacity'])
-
-def queryHWSet2():
-    myquery = {"name:": 'HWSet2'}
-    hwset = set.find_one(myquery)
-    return (hwset['availability'], hwset['capacity'])
-
-def queryHWSet(id):
-    myquery = {"id": id}
-    hwset = set.find_one(myquery)
-    return (hwset['availability'], hwset['capacity'])
+    return hwset
 
 # return 0 if unsuccessful, 1 if successful
-def initializeHWSet(id, capacity, availability):
-    exists = set.find_one({"id": id})
+def initializeHWSet(hwsetname, capacity, availability):
+    exists = set.find_one({"name": hwsetname})
     if exists is not None:
-        print("id", id, "already exists")
+        print("Hwset name", hwsetname, "already exists")
         return 0
-    
+
     hwsetDocument = {
-        "name": "HWSet" + str(id),
-        "id": id, 
+        "name": hwsetname,
         "capacity": capacity,
         "availability": availability}
+    
     set.insert_one(hwsetDocument)
     return 1
 
-# return 0 if unsuccessful, 1 if successful
-def changeHWSet1Availability(newCapacity):
-    set.update_one({"name": "HWSet1"},
-        {"$set": {
-            "capacity": newCapacity
-        }
-        })
-    return 1
+# # return 0 if unsuccessful, 1 if successful
+# def changeHWSet1Capacity(newCapacity):
+#     set.update_one({"name": "HWSet1"},
+#         {"$set": {
+#             "capacity": newCapacity
+#         }
+#         })
+#     return 1
+
+# # return 0 if unsuccessful, 1 if successful
+# def changeHWSet2Capacity(newCapacity):
+#     set.update_one({"name": "HWSet2"},
+#         {"$set": {
+#             "capacity": newCapacity
+#         }
+#         })
+#     return 1
 
 # return 0 if unsuccessful, 1 if successful
-def changeHWSet2Availability(newCapacity):
-    set.update_one({"name": "HWSet2"},
-        {"$set": {
-            "capacity": newCapacity
-        }
-        })
-    return 1
-
-# return 0 if unsuccessful, 1 if successful
-def changeCapacity(id, newCapacity):
-    record = set.find_one({"id": id})
-    if record is None: 
+def changeCapacity(hwsetname, newCapacity):
+    record = set.find_one({"name": hwsetname})
+    if record is None:
         return 0
-    set.update_one({"id": id},
+    set.update_one({"name": hwsetname},
         {"$set": {
             "capacity": newCapacity
         }
         })
     return 1
 
-# return 0 if unsuccessful, 1 if successful
-def changeHWSet1Availability(newAvailability):
-    set.update_one({"name": "HWSet1"},
-        {"$set": {
-            "availability": newAvailability
-        }
-        })
-    return 1
+# # return 0 if unsuccessful, 1 if successful
+# def changeHWSet1Availability(newAvailability):
+#     set.update_one({"name": "HWSet1"},
+#         {"$set": {
+#             "availability": newAvailability
+#         }
+#         })
+#     return 1
+
+# # return 0 if unsuccessful, 1 if successful
+# def changeHWSet2Availability(newAvailability):
+#     set.update_one({"name": "HWSet2"},
+#         {"$set": {
+#             "availability": newAvailability
+#         }
+#         })
+#     return 1
 
 # return 0 if unsuccessful, 1 if successful
-def changeHWSet2Availability(newAvailability):
-    set.update_one({"name": "HWSet2"},
-        {"$set": {
-            "availability": newAvailability
-        }
-        })
-    return 1
-
-# return 0 if unsuccessful, 1 if successful
-def changeAvailability(id, newAvailability):
-    record = set.find_one({"id": id})
-    if record is None: 
+def changeAvailability(hwsetname, newAvailability):
+    record = set.find_one({"name": hwsetname})
+    if record is None:
         return 0
-    set.update_one({"id": id},
+    set.update_one({"name": hwsetname},
         {"$set": {
             "availability": newAvailability
         }
