@@ -5,7 +5,7 @@ import "./HWSet.css"
 
 export default function HWSet(props) {
     var [qty, setQty] = useState(0)
-    var [available, setAvailable] = useState(100)
+    var [available, setAvailable] = useState(props.capacity)
     var [entered, setEntered] = useState(0)
 
     const handleChange = (event) => {
@@ -29,9 +29,9 @@ export default function HWSet(props) {
         var action = url.split("/")
         action = action[3]
 
-        if (action == "checkout"){
+        if (action === "checkout"){
             alert(responseJson["count"] + " hardware checked out")
-        }else if (action == "checkin"){
+        }else if (action === "checkin"){
             alert(responseJson["count"] + " hardware checked in")
         }
     }
@@ -44,7 +44,9 @@ export default function HWSet(props) {
             count = available
             checkedOut = available - qty
         }
+        
         setQty(count)
+        setAvailable(props.capacity - count)
         event.preventDefault();
         var url = "http://127.0.0.1/checkout/" + props.projectId + "/" + checkedOut
         myAsyncFunction(url)
@@ -59,6 +61,7 @@ export default function HWSet(props) {
             checkedIn = qty
         }
         setQty(count)
+        setAvailable(props.capacity - count)
         event.preventDefault();
         var url = "http://127.0.0.1/checkin/" + props.projectId + "/" + checkedIn
         myAsyncFunction(url, " hardware checked in.")
@@ -71,7 +74,8 @@ export default function HWSet(props) {
                     HW Set {props.number}
                 </td>
                 <td className='amount'>
-                    {qty}/{available}
+                    <tr>Checked Out: {qty}</tr>
+                    <tr>Available: {available}</tr>
                 </td>
                 <td>
                     <TextField id="outlined-basic" label="Enter quantity" variant="outlined" onChange={handleChange}/>

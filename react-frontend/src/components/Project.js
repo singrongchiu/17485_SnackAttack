@@ -5,6 +5,7 @@ import HWSet from './HWSet';
 
 export default function Project (props) {
     var [status, setStatus] = useState("Join")
+    const [capacity, setCapacity] = useState(100)
 
     let myAsyncFunction = async (url) => {
         const response = await fetch(url)
@@ -14,9 +15,9 @@ export default function Project (props) {
         var action = url.split("/")
         action = action[3]
 
-        if(action == "joinproject"){
+        if(action === "joinproject"){
             alert("Joined " + responseJson["id"])
-        }else if (action == "leaveproject"){
+        }else if (action === "leaveproject"){
             alert("Left " + responseJson["id"])
         }
     }
@@ -40,10 +41,9 @@ export default function Project (props) {
         <table>
             <tr>
                 <td className='projectTD'>Project Name {props.projectId}</td>
-                <td className='projectTD'>list of authorized users</td>
                 <td className='projectTD'>
-                    <HWSet projectId={props.projectId} hwSetID={1}/>
-                    <HWSet projectId={props.projectId} hwSetID={2}/>
+                    <HWSet projectId={props.projectId} hwSetID={1} capacity={capacity}/>
+                    <HWSet projectId={props.projectId} hwSetID={2} capacity={capacity}/>
                 </td>
                 <td className='projectTD'>
                     <Button variant="contained" onClick={handleChange}>{status}</Button>
