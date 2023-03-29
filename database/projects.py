@@ -1,6 +1,6 @@
 import pymongo
 # import database.hwsets as hwsets
-import hwsets
+import database.hwsets as hwsets
 
 db = "mongodb+srv://test_user:Passw0rd@cluster0.c3m9ayf.mongodb.net/?retryWrites=true&w=majority"
 client = pymongo.MongoClient(db)

@@ -23,9 +23,9 @@ def create_account(username, password, email):
     encrypted_username, encrypted_pw, encrypted_email = encrypt_credentials(username, password, email) 
     return users.create_new_user(encrypted_username, encrypted_pw, encrypted_email)
 
-def login(username, password, email):
-    encrypted_username, encrypted_pw, encrypted_email = encrypt_credentials(username, password, email) 
-    return users.sign_in(encrypted_username, encrypted_pw, encrypted_email)
+def login(username, password):
+    encrypted_username, encrypted_pw, encrypted_email = encrypt_credentials(username, password, "") 
+    return users.sign_in(encrypted_username, encrypted_pw)
 
 def forget_password(email):
     encrypted_user, encrypted_pw = users.get_login(cipher.encrypt(email, EMAIL_N, EMAIL_D))
