@@ -32,7 +32,7 @@ export default function Project (props) {
             setStatus("Join")
             change = "leaveproject"
         }
-        var url = "http://127.0.0.1" + change + "/" + props.projectId
+        var url = "http://127.0.0.1/" + change + "/" + props.projectId
         myAsyncFunction(url)
     }
 

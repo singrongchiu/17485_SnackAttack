@@ -1,4 +1,5 @@
 import pymongo
+import database.projects as projects
 
 db = "mongodb+srv://test_user:Passw0rd@cluster0.c3m9ayf.mongodb.net/?retryWrites=true&w=majority"
 client = pymongo.MongoClient(db)
@@ -17,7 +18,8 @@ def create_new_user(usernamehash, passwordhash, emailhash):
 
     personDocument = {
         "login": {"userhash": usernamehash, "passwordhash": passwordhash},
-        "email": emailhash}
+        "email": emailhash,
+        "projects": []}
 
     users.insert_one(personDocument)
     print("User account successfully created")
@@ -59,5 +61,21 @@ def change_password(usernamehash, passwordhash):
         })
     return 1
 
-# def close_connection():
-#     client.close()
+def userhash_add_project(userhash, projectuser, projectpassword):
+    success = projects.project_sign_in(projectuser, projectpassword)
+    if success == 1:
+        myuser = users.find_one({"login.userhash": userhash})
+        if myuser is not None:
+            users.update_one({"login.userhash": userhash},
+            {"$set": {
+                "projects": myuser["projects"] + [projectuser]
+            }
+            })
+            print("Project successfully added for user")
+            return 1
+        else:
+            print("Userhash is not valid")
+            return -1
+    else:
+        print("Username or password is incorrect")
+        return 0

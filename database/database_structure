@@ -3,7 +3,8 @@ users document:
 personDocument = {
         "login": {"userhash": "Abhay", "passwordhash": "Samant"},
         "email": "asd;lfj@kladf3d",
-        "checkedout": {"HWSet1": 0, "HWSet2": 0}}
+        "projects": ["projectid1", "projectid2", "projectid3"]
+        }
 
         credentials are stored as hashes,
         projects are stored as project ids
@@ -14,7 +15,8 @@ hwset document:
 hwsetDocument = {
         "name": "HWSet1",
         "capacity": 3000,
-        "availability": 200}
+        "availability": 200
+        }
 
 ------------------------------------------------------------------
 projects document:
