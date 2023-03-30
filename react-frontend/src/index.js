@@ -13,6 +13,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import CreateUser from './components/CreateUser';
 
 const defaultpage = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const defaultpage = createBrowserRouter([
   {
     path: "/project",
     element: <Projects/>,
+  },
+  {
+    path: "/newuser",
+    element: <CreateUser/>,
   }
 ]);
 

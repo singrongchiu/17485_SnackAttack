@@ -6,6 +6,15 @@ import login
 flask_app = Flask(__name__, static_folder='./build', static_url_path='/')
 CORS(flask_app)
 
+
+@flask_app.route("/createuser/<email>/<username>/<password>", methods=["GET", "POST"])
+def create_user(email, username, password):
+    if login.create_account(username, password, email):
+        return jsonify({"username": username, "success":"Y", "message": username + " account created!"})
+    else:
+        return jsonify({"username": username, "success":"N", "message": username + " account not created."})
+
+
 @flask_app.route("/login/<username>/<password>", methods=["GET", "POST"])
 def login_user(username, password):
     if login.login(username, password) == 1:
