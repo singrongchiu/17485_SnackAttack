@@ -34,10 +34,14 @@ export default function Login(props){
         }
     }
 
-    const HandleEnter = async() => {
+    const HandleEnter = (event) => {
         // /login/<username>/<password>
-        let url = "http://127.0.0.1" + "/login/" + username + "/" + password
+        var url = "http://127.0.0.1" + "/login/" + username + "/" + password
         myAsyncFunctionLogin(url)
+    }
+
+    const createUser = (event) => {
+        navigate("/newuser")
     }
 
     return(
@@ -50,11 +54,23 @@ export default function Login(props){
                         <div class="txt_field">
                             <TextField id='outlined-basic' label='Username' variant="outlined" onInput={handleUsername}/>
                         </div>
+                        <p>
+
+                        </p>
                         <div class="txt_field">
                             <TextField id='outlined-basic' label='Password' variant="outlined" onChange={handlePassword}/>
                         </div>
                     </form>
-                        <Button variant="contained" onClick={HandleEnter} > Submit</Button>
+                    <p>
+                            
+                    </p>
+                    <Button variant="contained" onClick={HandleEnter} >Submit</Button>
+                </div>
+                <p>
+
+                </p>
+                <div>
+                    <Button variant="contained" onClick={createUser}>Create User</Button>
                 </div>
             </body>
         </div>

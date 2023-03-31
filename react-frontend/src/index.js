@@ -5,7 +5,7 @@ import { BrowserRouter, Routes } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import Login from "./components/Login";
-import Projects from "./components/Projects";
+import Project from "./components/Project";
 
 import reportWebVitals from './reportWebVitals';
 
@@ -26,7 +26,7 @@ const defaultpage = createBrowserRouter([
   },
   {
     path: "/project",
-    element: <Projects/>,
+    element: <Project/>,
   },
   {
     path: "/newuser",
