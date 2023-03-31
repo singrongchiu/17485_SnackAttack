@@ -22,7 +22,8 @@ hwsetDocument = {
 projects document:
 
 projectDocument = {
+        "name": "Project Name 1",
         "id": "id_string222",
-        "password": "Samant",
+        "description": "This is a project for ECE461L",
         "checkedout": {"HWSet1": 30, "HWSet2":40}     ## {int project id: int number checked out}
         }

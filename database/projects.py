@@ -1,5 +1,4 @@
 import pymongo
-# import database.hwsets as hwsets
 import database.hwsets as hwsets
 
 db = "mongodb+srv://test_user:Passw0rd@cluster0.c3m9ayf.mongodb.net/?retryWrites=true&w=majority"
@@ -11,17 +10,18 @@ projects = client.test.projects
 # checks if the project already exists in the database
 # returns 1 if successful and 0 if unsuccessful
 
-def create_new_project(id, password):
+def create_new_project(name, id, description):
     myquery = {"id": id}
     x = projects.find_one(myquery)
-    if x != None:
+    if x != None: 
         print("Project ID", id, "already exists")
         return 0
 
     projectDocument = {
-        "id": id,
-        "password": password,
-        "checkedout": {"HWSet1": 0, "HWSet2": 0}
+        "name": name,
+        "id": id, 
+        "description": description,
+        "checkedout": {"HWSet1": 0, "HWSet2":0}     ## {int project id: int number checked out}
     }
 
     projects.insert_one(projectDocument)
@@ -49,7 +49,7 @@ def create_new_project(id, password):
 
 # returns 1 if id and password matches and
 # 0 if they don't match
-def project_sign_in(projectid, password):
+def project_sign_in(projectid):
     myquery = {"id": projectid}
     x = projects.find_one(myquery)
     if x == None:
@@ -57,12 +57,7 @@ def project_sign_in(projectid, password):
         return 0
 
     print("Project ID", projectid, "exists")
-    if (x["password"]== password):
-        print("Successful login for", projectid, password)
-        return 1
-    else:
-        print("Password", password, "is INCORRECT")
-        return 0
+    return 1
 
 # checks if user is a part of the project
 # def project_sign_in_with_user(projectid, password, userid):
