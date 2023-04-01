@@ -35,7 +35,7 @@ function ProjectLogin(props)
             <br />
         
 
-            <button onClick={() => handleClick('Button 1')}>SUBMIT</button>
+            <button onClick={() => handleClick('New Project Button')}>SUBMIT</button>
             <br />
 
             <br />
@@ -47,7 +47,7 @@ function ProjectLogin(props)
                 id="myTextBox"
             />
             <br />
-            <button onClick={() => handleClick('Button 4')}>SUBMIT</button>
+            <button onClick={() => handleClick('Existing Project Button')}>SUBMIT</button>
         </div>
     );
   }
