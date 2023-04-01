@@ -54,7 +54,11 @@ export default function CreateUser(props){
         <div>
             <title>Login Page</title>
             <body>
-                <div class="center">
+                <div class="center"
+                    style={{
+                    textAlign: "center"
+                    }}
+                    >
                     <h1>Create New User</h1>
                     <form method="post">
                         <div class="txt_field">
