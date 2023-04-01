@@ -1,8 +1,10 @@
 import cipher
 import pymongo
 from database import hwsets
+from database import projects
 
 print(hwsets.queryHWSet("HWSet1"))
+print(projects.create_new_project("New Project", "newproject123", "this is a description"))
 # USER_N = 4
 # USER_D = 1
 # PW_N = 8

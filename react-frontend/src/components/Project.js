@@ -13,6 +13,9 @@ export default function Project (props) {
     useEffect(() => {getCapacity("http://127.0.0.1/hwset2cap").then(setHwSet2Cap)},[])
     useEffect(() => {getAvailability("http://127.0.0.1/gethwset1availability").then(setHwSet1Avail)},[])
     useEffect(() => {getAvailability("http://127.0.0.1/gethwset2availability").then(setHwSet2Avail)},[])
+ 
+    // TO CHANGE
+    const projectname = "newproject123"
 
     let myAsyncFunction = async (url) => {
         const response = await fetch(url)
@@ -58,14 +61,17 @@ export default function Project (props) {
         myAsyncFunction(url)
     }
 
+    // NOTE: FOR NOW, project id is newproject123, project page will pass in project id later
     
     return(
         <table>
             <tr>
                 <td className='projectTD'>Project Name {props.projectId}</td>
                 <td className='projectTD'>
-                    <HWSet projectId={props.projectId} hwSetID={1} capacity={hwSet1Cap} availability={hwset1Avail}/>
-                    <HWSet projectId={props.projectId} hwSetID={2} capacity={hwSet2Cap} availability={hwset2Avail}/>
+                    <HWSet projectId={projectname} hwSetID={"HWSet1"} capacity={hwSet1Cap} availability={hwset1Avail}/>
+                    <HWSet projectId={projectname} hwSetID={"HWSet2"} capacity={hwSet2Cap} availability={hwset2Avail}/>
+                    {/* <HWSet projectId={props.projectId} hwSetID={"HWSet1"} capacity={hwSet1Cap} availability={hwset1Avail}/>
+                    <HWSet projectId={props.projectId} hwSetID={"HWSet1"} capacity={hwSet2Cap} availability={hwset2Avail}/> */}
                 </td>
                 <td className='projectTD'>
                     <Button variant="contained" onClick={handleChange}>{status}</Button>

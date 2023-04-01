@@ -10,14 +10,14 @@ export default function Projects(props){
             <h1>Projects</h1>
             <table className='projectTable'>
                 <tr className='projectRow'>
-                    <Project projectId={1} capacity={capacity}/>
+                    <Project projectId={"Name 1"} capacity={capacity}/>
                 </tr>
-                <tr className='projectRow'>
-                    <Project projectId={2} capacity={capacity}/>
+                {/* <tr className='projectRow'>
+                    <Project projectId={"s"} capacity={capacity}/>
                 </tr>
                 <tr className='projectRow'>
                     <Project projectId={3} capacity={capacity}/>
-                </tr>
+                </tr> */}
             </table>
         </div>
     )

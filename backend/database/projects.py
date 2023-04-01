@@ -5,6 +5,11 @@ db = "mongodb+srv://test_user:Passw0rd@cluster0.c3m9ayf.mongodb.net/?retryWrites
 client = pymongo.MongoClient(db)
 projects = client.test.projects
 
+def query_project(projectid):
+    myquery = {"id": projectid}
+    x = projects.find_one(myquery)
+    return x
+
 # id, password are strings
 # members is stored in database as a set
 # checks if the project already exists in the database
@@ -84,6 +89,7 @@ def project_sign_in(projectid):
 # returns 0 if there is not enough availability
 # returns 1 if successful
 def project_check_out(projectid, hwsetname, num):
+    num = int(num)
     if type(num) is not int:
         print("Input check out quantity is not an int")
         return -1
