@@ -5,8 +5,13 @@ import './ProjectLogin.css'
 
 function ProjectLogin(props)
 {
-    const handleClick = () => {
-      console.log('Button clicked');
+    const handleNewProject = () => {
+      console.log('New button clicked');
+      // Perform some action here
+    };
+
+    const handleProjectLogin = () => {
+      console.log('Login Button clicked');
       // Perform some action here
     };
   
@@ -26,9 +31,7 @@ function ProjectLogin(props)
             <TextField label="ProjectID" variant="outlined" />
             <br />
 
-            <Button variant="contained" color="primary">
-            Submit
-            </Button>
+            <Button variant="contained" color="primary" onClick={handleNewProject}>Submit</Button>
             <br />
 
             <br />
@@ -37,9 +40,7 @@ function ProjectLogin(props)
             <TextField label="ProjectID" variant="outlined" />
 
             <br />
-            <Button variant="contained" color="primary">
-            Submit
-            </Button>
+            <Button variant="contained" color="primary" onClick={handleProjectLogin}> Submit</Button>
         </div>
     );
   }

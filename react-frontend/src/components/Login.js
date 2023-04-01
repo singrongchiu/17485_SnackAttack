@@ -30,7 +30,7 @@ export default function Login(props){
         alert(responseJson["message"])
 
         if(responseJson["success"] === "Y") {
-            navigate("/Project");
+            navigate("/projectlogin");
         }
     }
 

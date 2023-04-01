@@ -22,12 +22,12 @@ const defaultpage = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "/projectlogin",
-    element: <ProjectLogin/>,
-  },
-  {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/projectlogin",
+    element: <ProjectLogin/>,
   },
   {
     path: "/project",
