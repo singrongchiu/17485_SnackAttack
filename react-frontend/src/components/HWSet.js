@@ -5,7 +5,6 @@ import "./HWSet.css"
 
 export default function HWSet(props) {
     const [capacity, setCapacity] = useState([])
-    var [qty, setQty] = useState(0)
     var [available, setAvailable] = useState([])
     var [entered, setEntered] = useState(0)
     useEffect(() => {setCapacity(props.capacity)}, [props.capacity])
@@ -18,6 +17,8 @@ export default function HWSet(props) {
     let myAsyncFunction = async (url) => {
         const response = await fetch(url)
         let responseJson = await response.json()
+        setAvailable(responseJson["availability"])
+        alert(responseJson["message"])
         console.log("response", responseJson)
     }
 
@@ -29,39 +30,26 @@ export default function HWSet(props) {
         }
 
         var new_available = available - checkedOut
-        setQty(checkedOut + qty)
         setAvailable(new_available)
         event.preventDefault();
-    
-        var url = "http://127.0.0.1/sethwset" + props.hwSetID + "availability/" + available + "/" + new_available
-        myAsyncFunction(url)
-        var url = "http://127.0.0.1/checkout/" + props.projectId + "/" + checkedOut
-        myAsyncFunction(url)
 
-        alert(checkedOut + " hardware checked out")
+        var url = "http://127.0.0.1/checkout/" + props.projectId + "/" + props.hwSetID + "/" + checkedOut
+        myAsyncFunction(url) 
         console.log("capacity " + capacity)
         console.log("availability " + available)
     }
 
     const checkIn = (event) => {
-        var count = qty - entered
         var checkedIn = entered
 
-        if(count < 0){
-            count = 0
-            checkedIn = qty
+        if(checkedIn < 0){
+            checkedIn = 0
         }
-        setQty(count)
-        var new_available = available + checkedIn
-        setAvailable(new_available)
         event.preventDefault();
 
-        var url = "http://127.0.0.1/sethwset" + props.hwSetID + "availability/" + available + "/" + new_available
+        var url = "http://127.0.0.1/checkin/" + props.projectId + "/" + props.hwSetID + "/" + checkedIn
         myAsyncFunction(url)
-        var url = "http://127.0.0.1/checkin/" + props.projectId + "/" + checkedIn
-        myAsyncFunction(url, " hardware checked in.")
 
-        alert(checkedIn + " hardware checked in")
         console.log("capacity " + capacity)
         console.log("availability " + available)
     }
@@ -70,10 +58,10 @@ export default function HWSet(props) {
         <table className='hwSetTable'>
             <tr>
                 <td className='title'>
-                    HW Set {props.number}
+                    {props.hwSetID}
                 </td>
                 <td className='amount'>
-                    <tr>Checked Out: {qty}</tr>
+                    <tr>Capacity: {capacity}</tr>
                     <tr>Available: {available}</tr>
                 </td>
                 <td>

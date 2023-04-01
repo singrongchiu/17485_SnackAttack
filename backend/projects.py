@@ -4,6 +4,9 @@ import database.projects as projects
 PROJ_N = 4
 PROJ_D = 1
 
+def query_project(projectid):
+    return projects.query_project(projectid)
+
 def create_project(name, id, description):
     return projects.create_new_project(name, cipher.encrypt(id, PROJ_N, PROJ_D), description)
 
