@@ -17,6 +17,11 @@ function ProjectLogin(props)
   
     return (
         <div>
+          style={{
+          display: "flex",
+          alignItems: "center",
+          height: "100%"
+          }}
             <h1>{"Create New Project"}</h1>
 
             <TextField label="Name" variant="outlined" />

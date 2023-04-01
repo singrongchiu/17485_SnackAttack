@@ -48,7 +48,10 @@ export default function Login(props){
         <div>
             <title>Login Page</title>
             <body>
-                <div class="center">
+                <div class="center"
+                    style={{
+                    textAlign: "center"
+                    }}>
                     <h1>Login</h1>
                     <form method="post">
                         <div class="txt_field">
@@ -69,7 +72,9 @@ export default function Login(props){
                 <p>
 
                 </p>
-                <div>
+                <div style={{
+                textAlign: "center"
+                }}>
                     <Button variant="contained" onClick={createUser}>Create User</Button>
                 </div>
             </body>

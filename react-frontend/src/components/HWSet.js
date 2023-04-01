@@ -6,9 +6,21 @@ import "./HWSet.css"
 export default function HWSet(props) {
     const [capacity, setCapacity] = useState([])
     var [available, setAvailable] = useState([])
+    var [checkedout, setCheckedOut] = useState([])
     var [entered, setEntered] = useState(0)
     useEffect(() => {setCapacity(props.capacity)}, [props.capacity])
     useEffect(() => {setAvailable(props.availability)},[props.availability])
+    const getcheckedouturl = "http://127.0.0.1/getcheckedout/" + props.projectId
+    const hwsetid = props.hwSetID
+    useEffect(() => {getCheckedOut(getcheckedouturl, hwsetid).then(setCheckedOut)},[getcheckedouturl, hwsetid])
+
+    let getCheckedOut = async (url, hwsetid) => {
+        const response = await fetch(url)
+        let responseJson = await response.json()
+        console.log("Checked Out", responseJson)
+        setCheckedOut(responseJson[hwsetid])
+        return responseJson[hwsetid]
+    }
 
     const handleChange = (event) => {
         setEntered((Number) (event.target.value))
@@ -35,6 +47,9 @@ export default function HWSet(props) {
 
         var url = "http://127.0.0.1/checkout/" + props.projectId + "/" + props.hwSetID + "/" + checkedOut
         myAsyncFunction(url) 
+        
+        getCheckedOut(getcheckedouturl, hwsetid)
+
         console.log("capacity " + capacity)
         console.log("availability " + available)
     }
@@ -50,6 +65,8 @@ export default function HWSet(props) {
         var url = "http://127.0.0.1/checkin/" + props.projectId + "/" + props.hwSetID + "/" + checkedIn
         myAsyncFunction(url)
 
+        getCheckedOut(getcheckedouturl, hwsetid)
+
         console.log("capacity " + capacity)
         console.log("availability " + available)
     }
@@ -59,6 +76,9 @@ export default function HWSet(props) {
             <tr>
                 <td className='title'>
                     {props.hwSetID}
+                </td>
+                <td className='amount'>
+                    <tr>Checked Out: {checkedout}</tr>
                 </td>
                 <td className='amount'>
                     <tr>Capacity: {capacity}</tr>

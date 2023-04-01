@@ -128,6 +128,7 @@ def project_check_out(projectid, hwsetname, num):
     return 1
 
 def project_check_in(projectid, hwsetname, num):
+    num = int(num)
     if type(num) is not int:
         print("Input check out quantity is not an int")
         return -1
