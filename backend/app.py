@@ -4,8 +4,29 @@ import os
 import login
 import projects
 
+import pymongo
+import database.projects as projects
+
+db = "mongodb+srv://test_user:Passw0rd@cluster0.c3m9ayf.mongodb.net/?retryWrites=true&w=majority"
+client = pymongo.MongoClient(db)
+hardware = client.test.hardware
+
 flask_app = Flask(__name__, static_folder='./build', static_url_path='/')
 CORS(flask_app)
+
+@flask_app.route("/hwset1cap", methods=["GET", "POST"])
+def get_hwset1_cap():
+    myquery = {"name": "HWSet1"}
+    x = hardware.find_one(myquery)
+    print(x["capacity"])
+    return jsonify({"capacity": x["capacity"]})
+
+@flask_app.route("/hwset2cap", methods=["GET", "POST"])
+def get_hwset2_cap():
+    myquery = {"name": "HWSet2"}
+    x = hardware.find_one(myquery)
+    print(x["capacity"])
+    return jsonify({"capacity": x["capacity"]})
 
 @flask_app.route("/createuser/<email>/<username>/<password>", methods=["GET", "POST"])
 def create_user(email, username, password):

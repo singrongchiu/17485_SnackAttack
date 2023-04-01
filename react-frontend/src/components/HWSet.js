@@ -1,12 +1,13 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField'
 import "./HWSet.css"
 
 export default function HWSet(props) {
     var [qty, setQty] = useState(0)
-    var [available, setAvailable] = useState(props.capacity)
+    var [available, setAvailable] = useState([])
     var [entered, setEntered] = useState(0)
+    useEffect(() => {setAvailable(props.capacity)},[props.capacity]);
 
     const handleChange = (event) => {
         setEntered((Number) (event.target.value))

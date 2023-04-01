@@ -1,11 +1,14 @@
 import './Project.css'
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Button from '@mui/material/Button';
 import HWSet from './HWSet';
 
 export default function Project (props) {
     var [status, setStatus] = useState("Join")
-    const [capacity, setCapacity] = useState(100)
+    const [hwSet1Cap, setHwSet1Cap] = useState([])
+    const [hwSet2Cap, setHwSet2Cap] = useState([])
+    useEffect(() => {getCapacity("http://127.0.0.1/hwset1cap").then(setHwSet1Cap)},[]);
+    useEffect(() => {getCapacity("http://127.0.0.1/hwset2cap").then(setHwSet2Cap)},[]);
 
     let myAsyncFunction = async (url) => {
         const response = await fetch(url)
@@ -21,6 +24,14 @@ export default function Project (props) {
             alert("Left " + responseJson["id"])
         }
     }
+
+    let getCapacity = async (url) => {
+        const response = await fetch(url)
+        let responseJson = await response.json()
+        console.log("response", responseJson)
+        return responseJson["capacity"]
+    }
+    
 
     const handleChange = (event) => {
         var change;
@@ -42,8 +53,8 @@ export default function Project (props) {
             <tr>
                 <td className='projectTD'>Project Name {props.projectId}</td>
                 <td className='projectTD'>
-                    <HWSet projectId={props.projectId} hwSetID={1} capacity={capacity}/>
-                    <HWSet projectId={props.projectId} hwSetID={2} capacity={capacity}/>
+                    <HWSet projectId={props.projectId} hwSetID={1} capacity={hwSet1Cap}/>
+                    <HWSet projectId={props.projectId} hwSetID={2} capacity={hwSet2Cap}/>
                 </td>
                 <td className='projectTD'>
                     <Button variant="contained" onClick={handleChange}>{status}</Button>
