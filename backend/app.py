@@ -53,7 +53,7 @@ def login_user(username, password):
     else:
         return jsonify({"username": username, "success":"N", "message": "Unsuccessful Login"})
 
-@flask_app.route("/createproject/<name>/<projectid>/<description>", methods=["GET", "POST"])
+@flask_app.route("/newproject/<name>/<projectid>/<description>", methods=["GET", "POST"])
 def create_project(name, projectid, description):
     success = projects.create_project(name, projectid, description)
     if (success == 1):
@@ -75,10 +75,6 @@ def query_hwset(hwsetid):
     if (hwset == None):
         return jsonify({"success": "N", "hwsetid": hwsetid, "message": "HWset ID "+ hwsetid + " not found"})
     return jsonify({"success":"Y", "hwsetid": hwsetid, "availability":hwset["availability"]})
-
-@flask_app.route("/newproj/<projectname>/<projectid>/<projdescription>")
-def create_new_project(projectname, projectid, projdescription):
-    return jsonify({"success": "Y", "projectname": projectname, "projectid": projectid, "description": projdescription})
 
 # NOTE: need to add /<projectid>/ to be able to check out
 @flask_app.route("/checkout/<projectid>/<hwsetid>/<qty>", methods=["GET", "POST"])

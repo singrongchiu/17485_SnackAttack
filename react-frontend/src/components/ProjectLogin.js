@@ -26,14 +26,14 @@ function ProjectLogin(props){
     const handleNewProject = () => {
       console.log('New button clicked');
       var url = "http://127.0.0.1" + "/newproj/" + projName + "/" + projID + "/" + projDescription
-      myAsyncFunctionProjLogin(url)
+      let responseJson = myAsyncFunctionProjLogin(url)
       // Perform some action here
     };
 
     const handleProjectLogin = () => {
       console.log('Login Button clicked');
       var url = "http://127.0.0.1" + "/projlogin/" + projID
-      myAsyncFunctionProjLogin(url)
+      let responseJson = myAsyncFunctionProjLogin(url)
     };
 
     const myAsyncFunctionProjLogin = async (url) => {
