@@ -3,6 +3,7 @@ from flask import Flask, jsonify, request
 import os
 import login
 import projects
+import database.hwsets as hwsets
 
 flask_app = Flask(__name__, static_folder='./build', static_url_path='/')
 CORS(flask_app)
@@ -37,6 +38,13 @@ def project_login(projectid):
         return jsonify({"projectid": projectid, "success":"Y", "message": "Valid Project ID " + str(projectid)})
     else: 
         return jsonify({"projectid": projectid, "success":"N", "message": "Invalid Project ID " + str(projectid)})
+
+@flask_app.route("/queryhwset/<hwsetid>", methods=["GET", "POST"])
+def query_hwset(hwsetid):
+    hwset = hwsets.queryHWSet("hwsetid")
+    if (hwset == None):
+        return jsonify({"success": "N", "hwsetid": hwsetid, "message": "HWset ID "+ hwsetid + " not found"})
+    return jsonify({"success":"Y", "hwsetid": hwsetid, "availability":hwset["availability"]})
 
 # NOTE: need to add /<projectid>/ to be able to check out
 @flask_app.route("/checkout/<hwsetid>/<qty>", methods=["GET", "POST"])

@@ -1,9 +1,8 @@
 import sys
 import smtplib
 
-sys.path.insert(0, "./")
 import database.users as users
-import backend.cipher as cipher
+import cipher
 
 USER_N = 4
 USER_D = 1

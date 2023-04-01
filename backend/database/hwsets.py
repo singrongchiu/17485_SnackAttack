@@ -6,7 +6,7 @@ set = client.test.hardware
 
 # get availability and capacity
 def queryHWSet(name):
-    myquery = {"name:": name}
+    myquery = {"name": name}
     hwset = set.find_one(myquery)
     return hwset
 

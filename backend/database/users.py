@@ -1,5 +1,5 @@
 import pymongo
-import database.projects as projects
+from database import projects
 
 db = "mongodb+srv://test_user:Passw0rd@cluster0.c3m9ayf.mongodb.net/?retryWrites=true&w=majority"
 client = pymongo.MongoClient(db)
