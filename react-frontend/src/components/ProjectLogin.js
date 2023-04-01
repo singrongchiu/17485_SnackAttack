@@ -21,7 +21,9 @@ function ProjectLogin(props)
             <TextField label="ProjectID" variant="outlined" />
             <br />
 
-            <button onClick={() => handleClick('New Project Button')}>SUBMIT</button>
+            <Button variant="contained" color="primary">
+            Submit
+            </Button>
             <br />
 
             <br />
@@ -30,7 +32,9 @@ function ProjectLogin(props)
             <TextField label="ProjectID" variant="outlined" />
 
             <br />
-            <button onClick={() => handleClick('Existing Project Button')}>SUBMIT</button>
+            <Button variant="contained" color="primary">
+            Submit
+            </Button>
         </div>
     );
   }
