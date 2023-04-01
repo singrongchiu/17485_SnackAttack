@@ -6,6 +6,7 @@ import './index.css';
 import App from './App';
 import Login from "./components/Login";
 import Project from "./components/Project";
+import ProjectLogin from "./components/ProjectLogin"
 
 import reportWebVitals from './reportWebVitals';
 
@@ -19,6 +20,10 @@ const defaultpage = createBrowserRouter([
   {
     path: "/",
     element: <Login />,
+  },
+  {
+    path: "/projectlogin",
+    element: <ProjectLogin/>,
   },
   {
     path: "/login",
