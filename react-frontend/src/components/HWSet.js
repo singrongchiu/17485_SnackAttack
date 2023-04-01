@@ -4,53 +4,43 @@ import TextField from '@mui/material/TextField'
 import "./HWSet.css"
 
 export default function HWSet(props) {
+    const [capacity, setCapacity] = useState([])
     var [qty, setQty] = useState(0)
     var [available, setAvailable] = useState([])
     var [entered, setEntered] = useState(0)
-    useEffect(() => {setAvailable(props.capacity)},[props.capacity]);
+    useEffect(() => {setCapacity(props.capacity)}, [props.capacity])
+    useEffect(() => {setAvailable(props.availability)},[props.availability])
 
     const handleChange = (event) => {
         setEntered((Number) (event.target.value))
     }
 
     let myAsyncFunction = async (url) => {
-        // console.log("count")
-        // let dict = {
-        //     method : "POST",
-        //     mode: "cors",
-        //     body: JSON.stringify({
-        //         total : count
-        //     })
-        // }
-
         const response = await fetch(url)
         let responseJson = await response.json()
         console.log("response", responseJson)
-
-        var action = url.split("/")
-        action = action[3]
-
-        if (action === "checkout"){
-            alert(responseJson["count"] + " hardware checked out")
-        }else if (action === "checkin"){
-            alert(responseJson["count"] + " hardware checked in")
-        }
     }
 
     const checkOut = (event) =>{
-        var count = entered + qty
         var checkedOut = entered
 
-        if(count > available){
-            count = available
-            checkedOut = available - qty
+        if(checkedOut > available){
+            checkedOut = available
         }
-        
-        setQty(count)
-        setAvailable(props.capacity - count)
+
+        var new_available = available - checkedOut
+        setQty(checkedOut + qty)
+        setAvailable(new_available)
         event.preventDefault();
+    
+        var url = "http://127.0.0.1/sethwset" + props.hwSetID + "availability/" + available + "/" + new_available
+        myAsyncFunction(url)
         var url = "http://127.0.0.1/checkout/" + props.projectId + "/" + checkedOut
         myAsyncFunction(url)
+
+        alert(checkedOut + " hardware checked out")
+        console.log("capacity " + capacity)
+        console.log("availability " + available)
     }
 
     const checkIn = (event) => {
@@ -62,10 +52,18 @@ export default function HWSet(props) {
             checkedIn = qty
         }
         setQty(count)
-        setAvailable(props.capacity - count)
+        var new_available = available + checkedIn
+        setAvailable(new_available)
         event.preventDefault();
+
+        var url = "http://127.0.0.1/sethwset" + props.hwSetID + "availability/" + available + "/" + new_available
+        myAsyncFunction(url)
         var url = "http://127.0.0.1/checkin/" + props.projectId + "/" + checkedIn
         myAsyncFunction(url, " hardware checked in.")
+
+        alert(checkedIn + " hardware checked in")
+        console.log("capacity " + capacity)
+        console.log("availability " + available)
     }
 
     return(
