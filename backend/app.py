@@ -5,8 +5,65 @@ import login
 import projects
 import database.hwsets as hwsets
 
+import pymongo
+import database.projects as projects
+
+db = "mongodb+srv://test_user:Passw0rd@cluster0.c3m9ayf.mongodb.net/?retryWrites=true&w=majority"
+client = pymongo.MongoClient(db)
+hardware = client.test.hardware
+
 flask_app = Flask(__name__, static_folder='./build', static_url_path='/')
 CORS(flask_app)
+
+@flask_app.route("/hwset1cap", methods=["GET", "POST"])
+def get_hwset1_cap():
+    myquery = {"name": "HWSet1"}
+    x = hardware.find_one(myquery)
+    return jsonify({"capacity": x["capacity"]})
+
+@flask_app.route("/gethwset1availability", methods=["GET", "POST"])
+def get_hwset1_availability():
+    myquery = {"name": "HWSet1"}
+    x = hardware.find_one(myquery)
+    return jsonify({"availability": x["availability"]})
+
+@flask_app.route("/sethwset1availability/<current>/<new_amount>", methods=["GET", "POST"])
+def set_hwset1_availability(current, new_amount):
+    record = hardware.find_one({"availability": current})
+    if record is None:
+        return jsonify({})
+    hardware.update_one(
+        {"availability": current},
+        {"$set": {
+            "availability": new_amount
+        }
+        })
+    return jsonify(hardware.find_one({"availability": new_amount}))
+
+@flask_app.route("/hwset2cap", methods=["GET", "POST"])
+def get_hwset2_cap():
+    myquery = {"name": "HWSet2"}
+    x = hardware.find_one(myquery)
+    return jsonify({"capacity": x["capacity"]})
+
+@flask_app.route("/gethwset2availability", methods=["GET", "POST"])
+def get_hwset2_availability():
+    myquery = {"name": "HWSet2"}
+    x = hardware.find_one(myquery)
+    return jsonify({"availability": x["availability"]})
+
+@flask_app.route("/sethwset2availability/<current>/<new_amount>", methods=["GET", "POST"])
+def set_hwset2_availability(current, new_amount):
+    record = hardware.find_one({"availability": current})
+    if record is None:
+        return jsonify({})
+    hardware.update_one(
+        {"availability": current},
+        {"$set": {
+            "availability": new_amount
+        }
+        })
+    return jsonify(hardware.find_one({"availability": new_amount}))
 
 @flask_app.route("/createuser/<email>/<username>/<password>", methods=["GET", "POST"])
 def create_user(email, username, password):
