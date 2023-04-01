@@ -27,19 +27,6 @@ def get_hwset1_availability():
     x = hardware.find_one(myquery)
     return jsonify({"availability": x["availability"]})
 
-@flask_app.route("/sethwset1availability/<current>/<new_amount>", methods=["GET", "POST"])
-def set_hwset1_availability(current, new_amount):
-    record = hardware.find_one({"availability": current})
-    if record is None:
-        return jsonify({})
-    hardware.update_one(
-        {"availability": current},
-        {"$set": {
-            "availability": new_amount
-        }
-        })
-    return jsonify(hardware.find_one({"availability": new_amount}))
-
 @flask_app.route("/hwset2cap", methods=["GET", "POST"])
 def get_hwset2_cap():
     myquery = {"name": "HWSet2"}
@@ -51,19 +38,6 @@ def get_hwset2_availability():
     myquery = {"name": "HWSet2"}
     x = hardware.find_one(myquery)
     return jsonify({"availability": x["availability"]})
-
-@flask_app.route("/sethwset2availability/<current>/<new_amount>", methods=["GET", "POST"])
-def set_hwset2_availability(current, new_amount):
-    record = hardware.find_one({"availability": current})
-    if record is None:
-        return jsonify({})
-    hardware.update_one(
-        {"availability": current},
-        {"$set": {
-            "availability": new_amount
-        }
-        })
-    return jsonify(hardware.find_one({"availability": new_amount}))
 
 @flask_app.route("/createuser/<email>/<username>/<password>", methods=["GET", "POST"])
 def create_user(email, username, password):
@@ -123,7 +97,7 @@ def checkIn_hardware(projectid, hwsetid, qty):
     availability = hwsets.queryHWSet(hwsetid)["availability"]
     if success == 1:
         return jsonify({"id": hwsetid, 'availability': availability, 
-            "message": "Successfully checked out " + qty + " from " + hwsetid})
+            "message": "Successfully checked in " + qty + " from " + hwsetid})
     if success == -1:
         return jsonify({"id": hwsetid, 'availability': availability, 
             "message": "Incorrect Input"})
@@ -134,6 +108,7 @@ def checkIn_hardware(projectid, hwsetid, qty):
 @flask_app.route("/getcheckedout/<projectid>", methods=["GET", "POST"])
 def get_checkedout(projectid):
     x = projects.query_project(projectid)
+    print(x)
     return jsonify(x["checkedout"])
 
 @flask_app.route("/joinproject/<projectid>", methods=["GET", "POST"])
