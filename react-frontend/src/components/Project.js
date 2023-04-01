@@ -1,5 +1,6 @@
 import './Project.css'
 import React, {useState, useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import HWSet from './HWSet';
 
@@ -13,6 +14,8 @@ export default function Project (props) {
     useEffect(() => {getCapacity("http://127.0.0.1/hwset2cap").then(setHwSet2Cap)},[])
     useEffect(() => {getAvailability("http://127.0.0.1/gethwset1availability").then(setHwSet1Avail)},[])
     useEffect(() => {getAvailability("http://127.0.0.1/gethwset2availability").then(setHwSet2Avail)},[])
+
+    const navigate = useNavigate()
  
     // TO CHANGE
     const projectname = "newproject123"
@@ -57,8 +60,7 @@ export default function Project (props) {
             setStatus("Join")
             change = "leaveproject"
         }
-        var url = "http://127.0.0.1/" + change + "/" + props.projectId
-        myAsyncFunction(url)
+        navigate("/projectlogin")
     }
 
     // NOTE: FOR NOW, project id is newproject123, project page will pass in project id later
