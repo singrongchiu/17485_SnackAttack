@@ -34,7 +34,7 @@ export default function Project (props) {
     let getCheckedOutHWset2 = async (url) => {
         const response = await fetch(url)
         let responseJson = await response.json()
-        setCheckedOutHwset1(responseJson["HWSet2"])
+        setCheckedOutHwset2(responseJson["HWSet2"])
         console.log("Checked Out hwset 2", responseJson["HWSet2"])
         return responseJson["HWSet2"]
     }
