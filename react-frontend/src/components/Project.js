@@ -57,6 +57,10 @@ export default function Project (props) {
         navigate("/projectlogin")
     }
 
+    const handleLogOut = () => {
+        navigate("/login")
+    }
+
     // NOTE: FOR NOW, project id is newproject123, project page will pass in project id later
     
     return(
@@ -73,6 +77,9 @@ export default function Project (props) {
                     <Button variant="contained" onClick={handleChange}>Leave</Button>
                 </td>
             </tr>
+            <td>
+                <Button variant="contained" color="primary" onClick={handleLogOut}> Logout </Button>
+            </td>
         </table>
     )
 
