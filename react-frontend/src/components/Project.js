@@ -1,5 +1,6 @@
 import './Project.css'
 import React, {useState, useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import HWSet from './HWSet';
 
@@ -21,21 +22,6 @@ export default function Project (props) {
     const getcheckedouturl = "http://127.0.0.1/getcheckedout/" + projectname
     useEffect(() => {getCheckedOutHWset1(getcheckedouturl).then(setCheckedOutHwset1)},[getcheckedouturl])
     useEffect(() => {getCheckedOutHWset2(getcheckedouturl).then(setCheckedOutHwset2)},[getcheckedouturl])
-
-    let myAsyncFunction = async (url) => {
-        const response = await fetch(url)
-        let responseJson = await response.json()
-        console.log("response", responseJson)
-
-        var action = url.split("/")
-        action = action[3]
-
-        if(action === "joinproject"){
-            alert("Joined " + responseJson["id"])
-        }else if (action === "leaveproject"){
-            alert("Left " + responseJson["id"])
-        }
-    }
 
     let getCheckedOutHWset1 = async (url) => {
         const response = await fetch(url)
@@ -77,8 +63,7 @@ export default function Project (props) {
             setStatus("Join")
             change = "leaveproject"
         }
-        var url = "http://127.0.0.1/" + change + "/" + props.projectId
-        myAsyncFunction(url)
+        navigate("/projectlogin")
     }
 
     // NOTE: FOR NOW, project id is newproject123, project page will pass in project id later

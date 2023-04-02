@@ -10,17 +10,17 @@ function ProjectLogin(props){
 
     const handleProjName = (event) => {
       setProjName(event.target.value)
-      //console.log(projName)
+      console.log(projName)
     }
 
     const handleProjDes = (event) => {
       setProjDescription(event.target.value)
-      //console.log(projDescription)
+      console.log(projDescription)
     }
 
     const handleProjID = (event) => {
       setProjID(event.target.value)
-      //console.log(projID)
+      console.log(projID)
     }
 
     const handleNewProject = () => {
@@ -66,7 +66,7 @@ function ProjectLogin(props){
             <br />
             <h1>{"Use Existing Project"}</h1>
             <br />
-            <TextField label="ProjectID" variant="outlined" />
+            <TextField label="ProjectID" variant="outlined" onInput={handleProjID}/>
 
             <br />
             <Button variant="contained" color="primary" onClick={handleProjectLogin}> Submit</Button>
