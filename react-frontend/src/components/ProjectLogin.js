@@ -25,6 +25,10 @@ function ProjectLogin(props){
       myAsyncFunctionProjLogin(url)
     };
 
+    const handleLogOut = () => {
+      navigate("/login")
+    }
+
     const myAsyncFunctionProjLogin = async (url) => {
       const response = await fetch(url)
       let responseJson = await response.json()
@@ -62,6 +66,12 @@ function ProjectLogin(props){
 
             <br />
             <Button variant="contained" color="primary" onClick={handleProjectLogin}> Submit</Button>
+            <br />
+
+            <br />
+            <div>
+            <Button variant="contained" color="primary" onClick={handleLogOut}> Logout </Button>
+            </div>
         </div>
     );
   }
