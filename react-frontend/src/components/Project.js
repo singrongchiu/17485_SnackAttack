@@ -1,12 +1,12 @@
 import './Project.css'
 import React, {useState, useEffect} from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import HWSet from './HWSet';
 
 export default function Project (props) {
-    // TO CHANGE
-    const projectname = "newproject123"
+    const {state} = useLocation();
+    const { projectid } = state; // Read values passed on state
     
     const navigate = useNavigate()
     const [hwSet1Cap, setHwSet1Cap] = useState([])
@@ -19,7 +19,7 @@ export default function Project (props) {
     useEffect(() => {getCapacity("http://127.0.0.1/hwset2cap").then(setHwSet2Cap)},[])
     useEffect(() => {getAvailability("http://127.0.0.1/gethwset1availability").then(setHwSet1Avail)},[])
     useEffect(() => {getAvailability("http://127.0.0.1/gethwset2availability").then(setHwSet2Avail)},[])
-    const getcheckedouturl = "http://127.0.0.1/getcheckedout/" + projectname
+    const getcheckedouturl = "http://127.0.0.1/getcheckedout/" + projectid
     useEffect(() => {getCheckedOutHWset1(getcheckedouturl).then(setCheckedOutHwset1)},[getcheckedouturl])
     useEffect(() => {getCheckedOutHWset2(getcheckedouturl).then(setCheckedOutHwset2)},[getcheckedouturl])
 
@@ -34,7 +34,7 @@ export default function Project (props) {
     let getCheckedOutHWset2 = async (url) => {
         const response = await fetch(url)
         let responseJson = await response.json()
-        setCheckedOutHwset1(responseJson["HWSet2"])
+        setCheckedOutHwset2(responseJson["HWSet2"])
         console.log("Checked Out hwset 2", responseJson["HWSet2"])
         return responseJson["HWSet2"]
     }
@@ -66,10 +66,10 @@ export default function Project (props) {
     return(
         <table>
             <tr>
-                <td className='projectTD'>Project Name {props.projectId}</td>
+                <td className='projectTD'>Project Name {projectid}</td>
                 <td className='projectTD'>
-                    <HWSet projectId={projectname} hwSetID={"HWSet1"} checkedout={checkedouthwset1} capacity={hwSet1Cap} availability={hwset1Avail}/>
-                    <HWSet projectId={projectname} hwSetID={"HWSet2"} checkedout={checkedouthwset2} capacity={hwSet2Cap} availability={hwset2Avail}/>
+                    <HWSet projectId={projectid} hwSetID={"HWSet1"} checkedout={checkedouthwset1} capacity={hwSet1Cap} availability={hwset1Avail}/>
+                    <HWSet projectId={projectid} hwSetID={"HWSet2"} checkedout={checkedouthwset2} capacity={hwSet2Cap} availability={hwset2Avail}/>
                     {/* <HWSet projectId={props.projectId} hwSetID={"HWSet1"} capacity={hwSet1Cap} availability={hwset1Avail}/>
                     <HWSet projectId={props.projectId} hwSetID={"HWSet1"} capacity={hwSet2Cap} availability={hwset2Avail}/> */}
                 </td>

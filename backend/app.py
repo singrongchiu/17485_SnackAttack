@@ -55,7 +55,7 @@ def login_user(username, password):
 
 @flask_app.route("/newproject/<name>/<projectid>/<description>", methods=["GET", "POST"])
 def create_project(name, projectid, description):
-    success = projects.create_project(name, projectid, description)
+    success = projects.create_new_project(name, projectid, description)
     if (success == 1):
         return jsonify({"projectid": projectid, "success":"Y", "message": "Project created " + str(projectid)})
     else: 
@@ -63,7 +63,7 @@ def create_project(name, projectid, description):
 
 @flask_app.route("/projlogin/<projectid>", methods=["GET", "POST"])
 def project_login(projectid):
-    success = projects.login(projectid)
+    success = projects.project_sign_in(projectid)
     if (success == 1):
         return jsonify({"projectid": projectid, "success":"Y", "message": "Valid Project ID " + str(projectid)})
     else: 
