@@ -81,35 +81,37 @@ def query_hwset(hwsetid):
 def checkOut_hardware(projectid, hwsetid, qty):
     success = projects.project_check_out(projectid, hwsetid, qty)
     availability = hwsets.queryHWSet(hwsetid)["availability"]
+    checkedout = projects.query_project(projectid)["checkedout"][hwsetid]
     if success == 1:
-        return jsonify({"id": hwsetid, 'availability': availability, 
+        return jsonify({"id": hwsetid, 'availability': availability, "checkedout": checkedout, 
             "message": "Successfully checked out " + qty + " from " + hwsetid})
     if success == -1:
-        return jsonify({"id": hwsetid, 'availability': availability, 
+        return jsonify({"id": hwsetid, 'availability': availability, "checkedout": checkedout, 
             "message": "Incorrect Input"})
     else: 
-        return jsonify({"id": hwsetid, 'availability': availability, 
+        return jsonify({"id": hwsetid, 'availability': availability, "checkedout": checkedout, 
             "message": "HWSet does not have enough availability"})
     
 @flask_app.route("/checkin/<projectid>/<hwsetid>/<qty>", methods=["GET", "POST"])
 def checkIn_hardware(projectid, hwsetid, qty):
     success = projects.project_check_in(projectid, hwsetid, qty)
     availability = hwsets.queryHWSet(hwsetid)["availability"]
+    checkedout = projects.query_project(projectid)["checkedout"][hwsetid]
     if success == 1:
-        return jsonify({"id": hwsetid, 'availability': availability, 
+        return jsonify({"id": hwsetid, 'availability': availability, "checkedout": checkedout, 
             "message": "Successfully checked in " + qty + " from " + hwsetid})
     if success == -1:
-        return jsonify({"id": hwsetid, 'availability': availability, 
+        return jsonify({"id": hwsetid, 'availability': availability, "checkedout": checkedout, 
             "message": "Incorrect Input"})
     else: 
-        return jsonify({"id": hwsetid, 'availability': availability, 
+        return jsonify({"id": hwsetid, 'availability': availability, "checkedout": checkedout, 
             "message": "Can't check in amount " + qty + " from " + projectid})
 
 @flask_app.route("/getcheckedout/<projectid>", methods=["GET", "POST"])
 def get_checkedout(projectid):
     x = projects.query_project(projectid)
-    print(x)
-    return jsonify(x["checkedout"])
+    
+    return jsonify({"HWSet1": x["checkedout"]["HWSet1"], "HWSet2": x["checkedout"]["HWSet2"]})
 
 @flask_app.route("/joinproject/<projectid>", methods=["GET", "POST"])
 def joinProject(projectid):
