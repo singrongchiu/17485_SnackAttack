@@ -26,20 +26,6 @@ def login(username, password):
     encrypted_username, encrypted_pw, encrypted_email = encrypt_credentials(username, password, "") 
     return users.sign_in(encrypted_username, encrypted_pw)
 
-def forget_password(email):
-    encrypted_user, encrypted_pw = users.get_login(cipher.encrypt(email, EMAIL_N, EMAIL_D))
-    decrypted_user = cipher.decrypt(encrypted_user, USER_N, USER_D)
-    decrypted_pw = cipher.decrypt(encrypted_pw, PW_N, PW_D)
-
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.ehlo()
-    server.starttls()
-    server.login('alison.q.jin@gmail.com', 'mgeaedwjlnhngpul')
-
-    subject = "Forgot Login"
-    body = f"We have received your request for your login credentials.\nUsername: {decrypted_user}\nPassword: {decrypted_pw}\n\n Please reset your password upon logging in."
-    msg = f"Subject: {subject}\n\n{body}"
-    server.sendmail("alison.q.jin@gmail.com", email, msg)
 
 
 
