@@ -14,7 +14,7 @@ function ProjectLogin(props){
       const projDescription = document.getElementById("projDescription").value
 
       var url = "http://127.0.0.1" + "/newproject/" + projName + "/" + projID + "/" + projDescription
-      myAsyncFunctionProjLogin(url)
+      myAsyncFunctionProjLoginFromCreate(url)
       // Perform some action here
     };
 
@@ -27,6 +27,19 @@ function ProjectLogin(props){
 
     const handleLogOut = () => {
       navigate("/login")
+    }
+
+    const myAsyncFunctionProjLoginFromCreate = async (url) => {
+      const response = await fetch(url)
+      let responseJson = await response.json()
+
+      console.log("response", responseJson)
+      alert(responseJson["message"])
+
+      if(responseJson["success"] === "Y") {
+        const loginProjID = document.getElementById("projID").value
+        navigate("/project", {state: {projectid: loginProjID}});
+      }
     }
 
     const myAsyncFunctionProjLogin = async (url) => {
