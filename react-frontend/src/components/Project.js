@@ -8,7 +8,7 @@ export default function Project (props) {
     // TO CHANGE
     const projectname = "newproject123"
     
-    var [status, setStatus] = useState("Join")
+    const navigate = useNavigate()
     const [hwSet1Cap, setHwSet1Cap] = useState([])
     const [hwSet2Cap, setHwSet2Cap] = useState([])
     var [hwset1Avail, setHwSet1Avail] = useState([])
@@ -54,15 +54,6 @@ export default function Project (props) {
     }
 
     const handleChange = (event) => {
-        var change;
-
-        if(status === 'Join'){
-            setStatus("Leave")
-            change = "joinproject"
-        }else{
-            setStatus("Join")
-            change = "leaveproject"
-        }
         navigate("/projectlogin")
     }
 
@@ -79,7 +70,7 @@ export default function Project (props) {
                     <HWSet projectId={props.projectId} hwSetID={"HWSet1"} capacity={hwSet2Cap} availability={hwset2Avail}/> */}
                 </td>
                 <td className='projectTD'>
-                    <Button variant="contained" onClick={handleChange}>{status}</Button>
+                    <Button variant="contained" onClick={handleChange}>Leave</Button>
                 </td>
             </tr>
         </table>
