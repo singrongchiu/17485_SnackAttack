@@ -11,9 +11,16 @@ import database.projects as projects
 db = "mongodb+srv://test_user:Passw0rd@cluster0.c3m9ayf.mongodb.net/?retryWrites=true&w=majority"
 client = pymongo.MongoClient(db)
 hardware = client.test.hardware
+projects_db = client.test.projects
 
 flask_app = Flask(__name__, static_folder='./build', static_url_path='/')
 CORS(flask_app)
+
+@flask_app.route("/projectdescription/<projectid>", methods=["GET", "POST"])
+def get_project_description(projectid):
+    myquery = {"id": projectid}
+    x = projects_db.find_one(myquery)
+    return jsonify({"description": x["description"]})
 
 @flask_app.route("/hwset1cap", methods=["GET", "POST"])
 def get_hwset1_cap():

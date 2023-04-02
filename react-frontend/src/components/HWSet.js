@@ -70,6 +70,8 @@ export default function HWSet(props) {
                 </td>
                 <td className='amount'>
                     <tr>Capacity: {capacity}</tr>
+                </td>
+                <td className='amount'>
                     <tr>Available: {available}</tr>
                 </td>
                 <td>
