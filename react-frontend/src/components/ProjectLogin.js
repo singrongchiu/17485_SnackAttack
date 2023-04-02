@@ -13,10 +13,9 @@ function ProjectLogin(props){
       const projID = document.getElementById("projID").value
       const projDescription = document.getElementById("projDescription").value
 
-      var url = "http://127.0.0.1" + "/newproj/" + projName + "/" + projID + "/" + projDescription
-      let responseJson = myAsyncFunctionProjLogin(url)
+      var url = "http://127.0.0.1" + "/newproject/" + projName + "/" + projID + "/" + projDescription
+      myAsyncFunctionProjLogin(url)
       // Perform some action here
-      alert(responseJson["message"])
     };
 
     const handleProjectLogin = () => {
@@ -34,7 +33,10 @@ function ProjectLogin(props){
       alert(responseJson["message"])
 
       if(responseJson["success"] === "Y") {
-        const loginProjID = document.getElementById("loginProjID").value
+        var loginProjID = document.getElementById("loginProjID").value
+        if (loginProjID === "") {
+          loginProjID = document.getElementById("projID").value
+        }
         navigate("/project", {state: {projectid: loginProjID}});
       }
     }
