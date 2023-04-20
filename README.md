@@ -1,8 +1,17 @@
 # 17485_SnackAttack
 
 To compile:
-In one terminal, cd to 'react-frontend' directory and enter 'npm start'.
-In another terminal, enter 'python backend/app.py'.
+
+In one terminal, start the frontend:
+```
+cd react-frontend
+npm start
+```
+
+In another terminal, start the backend:
+```
+python backend/app.py
+```
 
 ## Login Page
 
