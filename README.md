@@ -59,5 +59,7 @@ Click the "Logout" button to logout.
 <img width="959" alt="image" src="https://user-images.githubusercontent.com/60490533/233430844-e607b562-3e8c-4fed-9bcc-dc6d70736e7c.png">
  
 Enter the quantity of hardware to check in or check out for the corresponding hardware set. A pop-up will notify you of the total amount checked in or out depending the on the availability and capacity of the hardware set.
+
+Clicking the "Leave" button will take you back to the Projects Create/Login Page. Clicking the "Logout" button will logout the user and take you back to the Login page.
   
 
