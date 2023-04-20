@@ -62,4 +62,5 @@ Enter the quantity of hardware to check in or check out for the corresponding ha
 
 Clicking the "Leave" button will take you back to the Projects Create/Login Page. Clicking the "Logout" button will logout the user and take you back to the Login page.
   
-## Potential Future Improvements 
+## Future Improvements 
+Currently, adding/removing hardware sets is not yet supported. Additionally, there are more features such as the option for users to see how many credits have been used for the hardware resources that will be added in the future to make the app more functional. The look and feel will also be modified depending on the preferences of stakeholders.
