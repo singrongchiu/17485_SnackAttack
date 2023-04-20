@@ -62,4 +62,4 @@ Enter the quantity of hardware to check in or check out for the corresponding ha
 
 Clicking the "Leave" button will take you back to the Projects Create/Login Page. Clicking the "Logout" button will logout the user and take you back to the Login page.
   
-
+## Potential Future Improvements 
